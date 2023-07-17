@@ -15,7 +15,9 @@ qt_add_executable(appQtAcademyAssignment
 qt_add_qml_module(appQtAcademyAssignment
     URI QtAcademyAssignment
     VERSION 1.0
-    QML_FILES Main.qml
+    QML_FILES
+    Main.qml
+    CustomCalander.qml
 )
 
 set_target_properties(appQtAcademyAssignment PROPERTIES
