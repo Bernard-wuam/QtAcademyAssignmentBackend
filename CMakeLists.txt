@@ -17,8 +17,22 @@ qt_add_qml_module(appQtAcademyAssignment
     VERSION 1.0
     QML_FILES
     Main.qml
-    CustomCalander.qml
+    components/calendarComponents/Mycalendar.qml
+    components/Header.qml
+    components/CalendarDateHeader.qml
+    components/CustomCalendar.qml
+    components/ListViewComponent.qml
+
+    RESOURCES
+    assets/svgIcon/logo.svg
+    assets/profileImage/avator.jpg
+
+    SOURCES
+    todomodel.cpp
+    todomodel.h
 )
+
+add_subdirectory(buttonComponents/)
 
 set_target_properties(appQtAcademyAssignment PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
@@ -29,7 +43,7 @@ set_target_properties(appQtAcademyAssignment PROPERTIES
 )
 
 target_link_libraries(appQtAcademyAssignment
-    PRIVATE Qt6::Quick
+    PRIVATE Qt6::Quick buttonComponentsplugin
 )
 
 install(TARGETS appQtAcademyAssignment
