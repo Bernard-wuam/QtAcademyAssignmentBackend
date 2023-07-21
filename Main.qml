@@ -30,47 +30,11 @@ Window {
 
         contentItem: Rectangle{
             color: "#0294C2"
-            ColumnLayout{
+
+            StackView{
+                id:frontPageComponent
                 anchors.fill: parent
-                spacing: 0
-                Item{
-                    Layout.preferredHeight:  0.06 * mainPage.height
-                    Layout.fillWidth: true
-
-                    CalendarDateHeader{
-                        id:calendarDateHeader
-                        anchors.fill: parent
-                        onNext: customCalendar.next()
-                        onPrevious: customCalendar.previous()
-                        monthName: customCalendar.monthName
-                    }
-                }
-                Rectangle{
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 280
-                    color: "red"
-
-                    CustomCalendar{
-                        id:customCalendar
-                        anchors.fill: parent
-                    }
-                }
-
-                Item{
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-
-                    Rectangle{
-                        anchors.fill: parent
-                        color: "#2968B2"
-
-                        ListViewComponent{
-                            anchors.fill: parent
-                            anchors.margins: 10
-                        }
-                    }
-                }
-
+                initialItem: FrontPageComponent{}
             }
         }
 

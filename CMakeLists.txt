@@ -22,6 +22,7 @@ qt_add_qml_module(appQtAcademyAssignment
     components/CalendarDateHeader.qml
     components/CustomCalendar.qml
     components/ListViewComponent.qml
+    components/FrontPageComponent.qml
 
     RESOURCES
     assets/svgIcon/logo.svg
