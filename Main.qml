@@ -34,7 +34,7 @@ Window {
             StackView{
                 id:frontPageComponent
                 anchors.fill: parent
-                initialItem: FrontPageComponent{}
+                initialItem: FormPageComponent{}
             }
         }
 
