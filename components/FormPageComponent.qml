@@ -10,7 +10,7 @@ import "./calendarComponents"
 ColumnLayout{
     spacing: 0
     Item{
-        Layout.preferredHeight:  0.06 * mainPage.height
+        Layout.preferredHeight:  0.06 * parent.height
         Layout.fillWidth: true
 
         CalendarDateHeader{
@@ -18,17 +18,7 @@ ColumnLayout{
             anchors.fill: parent
             onNext: customCalendar.next()
             onPrevious: customCalendar.previous()
-            monthName: customCalendar.monthName
-        }
-    }
-    Rectangle{
-        Layout.fillWidth: true
-        Layout.preferredHeight: 280
-        color: "red"
-
-        CustomCalendar{
-            id:customCalendar
-            anchors.fill: parent
+            //monthName: customCalendar.monthName
         }
     }
 
@@ -38,12 +28,10 @@ ColumnLayout{
 
         Rectangle{
             anchors.fill: parent
+            anchors.margins: 15
+            radius: 10
             color: "#2968B2"
 
-            ListViewComponent{
-                anchors.fill: parent
-                anchors.margins: 10
-            }
         }
     }
 
