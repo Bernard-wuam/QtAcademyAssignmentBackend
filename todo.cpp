@@ -20,7 +20,6 @@ void ToDo::addToDoData(QString title, QString description, bool isTimed,
   emit preAdd();
   m_toDoModelList.append(
       ToDoData{title, description, isTimed, startTime, elapsedTime});
-  qInfo() << "append " << m_toDoModelList.size();
   emit postAdd();
 }
 
@@ -31,11 +30,9 @@ void ToDo::removeToDoData(int index) {
 }
 
 void ToDo::calTimeElapsed() {
-  // emit preAdd();
-  qInfo() << "called ...from ll " << m_toDoModelList.size();
   for (int i = 0; i < m_toDoModelList.size(); i++) {
     if (m_toDoModelList[i].timeTo > 0) m_toDoModelList[i].timeTo -= 1;
-    qInfo() << "the value change " << m_toDoModelList[i].timeTo;
+
     emit singleDataChanged(i);
   }
   // emit postAdd();
