@@ -13,11 +13,14 @@ svgIcon/SearchIcon.svg
 svgIcon/ForwardIcon.svg
 svgIcon/BackIcon.svg
 svgIcon/AlarmIcon.svg
-svgIcon/plusIcon.svg
+svgIcon/PlusIcon.svg
+svgIcon/UpIcon.svg
+svgIcon/DownIcon.svg
 
 QML_FILES
 IconButton.qml
 IconSvg.qml
+IconComboBox.qml
 
 )
 

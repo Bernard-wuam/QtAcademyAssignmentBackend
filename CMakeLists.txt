@@ -30,8 +30,12 @@ qt_add_qml_module(appQtAcademyAssignment
     assets/profileImage/avator.jpg
 
     SOURCES
-    todomodel.cpp
-    todomodel.h
+    todo.cpp
+    todo.h
+    todolistmodel.cpp
+    todolistmodel.h
+    tododatabase.cpp
+    tododatabase.h
 )
 
 add_subdirectory(buttonComponents/)

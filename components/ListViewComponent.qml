@@ -9,9 +9,10 @@ ListView{
     id:ls
     clip: true
     spacing:1
-
-    model:TodoModel{
-        id:model
+    property alias toDoItemList: todoModel.toDoItemList
+    signal displaylistview()
+    model:ToDoListModel{
+        id:todoModel
     }
 
     delegate: Item{
@@ -141,14 +142,20 @@ ListView{
             hoverEnabled: true
             cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
 
-            onClicked: console.log("add to listview")
+            onClicked:{
+
+                console.log("add to listview")
+                ls.displaylistview()
+            }
         }
         IconButton{
             anchors.centerIn: parent
             iconSource: IconSvg.plusIcon
             iconImage.sourceSize.width: 20
             iconColor: "#2968B2"
-            onClicked: console.log("add to listview")
+            onClicked: {
+                ls.displaylistview()
+            }
         }
     }
 }

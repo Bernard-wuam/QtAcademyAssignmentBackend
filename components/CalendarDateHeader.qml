@@ -8,11 +8,11 @@ import ButtonComponents
 Item{
     id:root
 
-    signal next()
-    signal previous()
-
-    property string monthName
-
+    property int month: new Date().getMonth()
+    property int day : new Date().getDate()
+    property int year : new Date().getFullYear()
+    property string monthName: ['Jan','Feb','Mar','Apr','May','June','July','Aug','Sept','Oct','Nov','Dec'][root.month]
+    signal clicked(int year,int month,int day)
 
     RowLayout{
         anchors.fill: parent
@@ -47,7 +47,7 @@ Item{
             {
                 id:calendarNavigationArrowContainer
 
-                width: parent.width * .45
+                width: parent.width * .6
                 height: parent.height
 
                 RowLayout{
@@ -66,7 +66,15 @@ Item{
                             iconImage.sourceSize.width: 10
 
                             onClicked: {
-                                root.previous()
+                                if(root.month > 0){
+                                    root.month -= 1
+                                    root.clicked(root.year,root.month,root.day)
+                                }
+                                else{
+                                    root.month = 11
+                                    root.year -= 1
+                                    root.clicked(root.year,root.month,root.day)
+                                }
                             }
                         }
                     }
@@ -78,7 +86,7 @@ Item{
 
                         Text {
                             id:currentDate
-                            text: qsTr(root.monthName + " , 2023")
+                            text: qsTr(root.day +", " + root.monthName + ", "+ root.year)
                             anchors.centerIn: parent
                             font.pixelSize: 14
                             font.weight: Font.DemiBold
@@ -96,7 +104,18 @@ Item{
                             anchors.right: parent.right
                             anchors.verticalCenter: parent.verticalCenter
                             iconImage.sourceSize.width: 10
-                            onClicked: root.next()
+                            onClicked: {
+                                if(root.month < 11){
+                                    root.month += 1
+                                    root.clicked(root.year,root.month,root.day)
+                                }
+                                else{
+                                    root.month = 0
+                                    root.year += 1
+                                    root.clicked(root.year,root.month,root.day)
+                                }
+
+                            }
                         }
                     }
                 }

@@ -11,16 +11,17 @@ import "./components"
 
 
 Window {
-    width: 445
-    height: 640
+    width: 300
+    height: 600
     visible: true
     title: qsTr("Hello World")
-
+    x:890
+    y:30
 
     Page{
         id:mainPage
         width: 290
-        height: 650
+        height: 600
 
         header: Header{
             id:headerBackground
@@ -34,7 +35,7 @@ Window {
             StackView{
                 id:frontPageComponent
                 anchors.fill: parent
-                initialItem: FormPageComponent{}
+                initialItem: FrontPageComponent{}
             }
         }
 

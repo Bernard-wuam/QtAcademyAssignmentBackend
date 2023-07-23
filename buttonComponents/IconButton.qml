@@ -26,7 +26,7 @@ Item{
             Behavior on color {
 
                 ColorAnimation {
-                    duration: iconColorHoverAnimationDuration
+                    duration: root.iconColorHoverAnimationDuration
                 }
             }
         }

@@ -9,5 +9,7 @@ Item {
     property string rectangleLargeIcon: "svgIcon/RectangleLargeIcon.svg"
     property string rectangleSmallIcon: "svgIcon/RectangleSmallIcon.svg"
     property string searchIcon: "svgIcon/SearchIcon.svg"
-     property string plusIcon: "svgIcon/plusIcon.svg"
+     property string plusIcon: "svgIcon/PlusIcon.svg"
+    property string upIcon: "svgIcon/UpIcon.svg"
+    property string downIcon: "svgIcon/DownIcon.svg"
 }
