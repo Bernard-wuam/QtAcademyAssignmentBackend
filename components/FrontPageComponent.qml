@@ -17,7 +17,6 @@ ColumnLayout{
             id:calendarDateHeader
             anchors.fill: parent
             onClicked: function(year,month,day){
-                console.log('kkk')
                 listview.toDoItemList = ToDoDataBase.getTodo(year,month,day)
             }
         }
@@ -25,7 +24,7 @@ ColumnLayout{
     Rectangle{
         Layout.fillWidth: true
         Layout.preferredHeight: 280
-        color: "red"
+        color: "#0294C2"
 
         CustomCalendar{
             id:customCalendar
@@ -49,7 +48,7 @@ ColumnLayout{
         Rectangle{
             anchors.fill: parent
             color: "#2968B2"
-
+            radius: 10
             ListViewComponent{
                 id:listview
                 anchors.fill: parent

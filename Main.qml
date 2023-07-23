@@ -12,35 +12,39 @@ import "./components"
 
 Window {
     width: 300
-    height: 600
+    height: 610
     visible: true
     title: qsTr("Hello World")
     x:890
     y:30
 
-    Page{
-        id:mainPage
+    Rectangle{
         width: 290
         height: 600
+        color: "#0294C2"
+        anchors.centerIn: parent
 
-        header: Header{
-            id:headerBackground
-            width: mainPage.width
-            height: mainPage.height * .08
-        }
-
-        contentItem: Rectangle{
-            color: "#0294C2"
-
-            StackView{
-                id:frontPageComponent
-                anchors.fill: parent
-                initialItem: FrontPageComponent{}
+        Page{
+            id:mainPage
+            anchors.fill: parent
+            anchors.margins: 10
+            header: Header{
+                id:headerBackground
+                width: mainPage.width
+                height: mainPage.height * .08
             }
+
+            contentItem: Rectangle{
+                color: "#0294C2"
+                StackView{
+                    id:frontPageComponent
+                    anchors.fill: parent
+                    initialItem: FrontPageComponent{}
+                }
+            }
+
+            //color: "#0294C2"
         }
-
-        //color: "#0294C2"
     }
-
 
 }

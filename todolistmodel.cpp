@@ -1,6 +1,12 @@
 #include "todolistmodel.h"
 
-ToDoListModel::ToDoListModel(QObject *parent) : QAbstractListModel(parent) {}
+ToDoListModel::ToDoListModel(QObject *parent) : QAbstractListModel(parent) {
+  connect(m_toDoItemList, &ToDo::singleDataChanged, this, [=](int index) {
+    emit dataChanged(QModelIndex(), QModelIndex());
+    qInfo() << "kk,,calleed by preAA";
+    // dataChanged(index, index);
+  });
+}
 
 int ToDoListModel::rowCount(const QModelIndex &parent) const {
   // For list models only the root node (an invalid parent) should return the
@@ -19,6 +25,7 @@ QVariant ToDoListModel::data(const QModelIndex &index, int role) const {
   const auto DescriptionRole = static_cast<int>(NameRole::DescriptionRole);
   const auto IsAlarmSetRole = static_cast<int>(NameRole::IsAlarmSetRole);
   const auto StartTimeRole = static_cast<int>(NameRole::StartTimeRole);
+  const auto TimeElapsedRole = static_cast<int>(NameRole::TimeElasedRole);
 
   switch (role) {
     case TitleRole:
@@ -29,6 +36,8 @@ QVariant ToDoListModel::data(const QModelIndex &index, int role) const {
       return m_toDoItemList->getToDoData().at(c).isAlarmSet;
     case StartTimeRole:
       return m_toDoItemList->getToDoData().at(c).startTime;
+    case TimeElapsedRole:
+      return m_toDoItemList->getToDoData().at(c).timeTo;
   }
   return QVariant();
 }
@@ -39,6 +48,7 @@ QHash<int, QByteArray> ToDoListModel::roleNames() const {
   namerole[static_cast<int>(NameRole::DescriptionRole)] = "description";
   namerole[static_cast<int>(NameRole::IsAlarmSetRole)] = "isAlarmSet";
   namerole[static_cast<int>(NameRole::StartTimeRole)] = "startTime";
+  namerole[static_cast<int>(NameRole::TimeElasedRole)] = "timeElapsed";
   return namerole;
 }
 
@@ -55,10 +65,14 @@ void ToDoListModel::setToDoItemList(ToDo *newToDoItemList) {
 
   if (m_toDoItemList) {
     connect(m_toDoItemList, &ToDo::preAdd, this, [=]() {
+      // qInfo() << "called by preADD";
       auto index = m_toDoItemList->count();
       beginInsertRows(QModelIndex(), index, index);
     });
-
+    connect(m_toDoItemList, &ToDo::singleDataChanged, this, [=](int index) {
+      beginResetModel();
+      endResetModel();
+    });
     connect(m_toDoItemList, &ToDo::postAdd, this, [=]() { endInsertRows(); });
 
     connect(m_toDoItemList, &ToDo::preRemove, this,
@@ -71,7 +85,10 @@ void ToDoListModel::setToDoItemList(ToDo *newToDoItemList) {
   emit toDoItemListChanged();
 }
 
-void ToDoListModel::add(QString title, QString description, bool isTimed,
-                        QString startTime) {
-  m_toDoItemList->addToDoData(title, description, isTimed, startTime);
-}
+// void ToDoListModel::add(QString title, QString description, bool isTimed,
+//                         int startHour, int startMinute, int endHour,
+//                         int endMinute) {
+//   m_toDoItemList->addToDoData(title, description, isTimed, startHour,
+//   endHour,
+//                               startMinute, endMinute);
+// }

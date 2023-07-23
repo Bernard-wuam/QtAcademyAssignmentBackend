@@ -70,8 +70,6 @@ ColumnLayout{
                             radius: 10
                         }
                     }
-
-
                 }
                 Rectangle{
                     color: "#2968B2"
@@ -247,10 +245,8 @@ ColumnLayout{
                             let u = monAlias.indexOf(root.monthName);
                             let year = root.year
                             console.log(year)
-
-//                            add(int year, int month, int day, QString title,
-//                                                   QString description, bool isTime, int hour, int minute)
-                            ToDoDataBase.add(year,u,root.day,title.text,description.text,1,startTimeHour,startTimeMinutes)
+                           // console.log(startTimeHour,startTimeMinutes,endTimeHour,endTimeMinutes)
+                            ToDoDataBase.add(year,u,root.day,title.text,description.text,1,starthourtime,startminutetime,endhourtime,endminutetime)
                             root.clicked(year,u,root.day)
                             root.StackView.view.pop()
                         }

@@ -18,6 +18,7 @@ ListView{
     delegate: Item{
         width: ls.width
         height: 76
+
         IconButton{
             anchors.fill: parent
             iconColor: "#D9D9D9"
@@ -37,7 +38,7 @@ ListView{
                     anchors.fill: parent
                     spacing: 0
                     Item{
-                        Layout.preferredHeight: parent.height * .3
+                        Layout.preferredHeight: parent.height * .35
                         Layout.fillWidth: true
 
                         Text {
@@ -47,7 +48,7 @@ ListView{
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
                             text: qsTr(model.title)
-                             color: "#2F0000"
+                            color: "#2F0000"
                             font.pixelSize: 11
                             font.weight: Font.Thin
                             elide: Text.ElideRight
@@ -65,7 +66,7 @@ ListView{
                             rightPadding: 5
                             maximumLineCount: 3
                             elide: Text.ElideRight
-                             color: "#2F0000"
+                            color: "#2F0000"
                             lineHeight: .8
                             verticalAlignment: Text.AlignVCenter
                             wrapMode: Text.WrapAnywhere
@@ -101,6 +102,7 @@ ListView{
                         Layout.fillWidth: true
 
                         Text {
+                            id:startTime
                             anchors.centerIn: parent
                             text: qsTr(model.startTime)
                             font.pixelSize: 10
@@ -112,50 +114,60 @@ ListView{
                         Layout.fillWidth: true
 
                         Text {
-                            anchors.centerIn: parent
-                            text: qsTr("30min\nElapased")
-                            color: "#2F0000"
-                            font.pixelSize: 8
-                            lineHeight: .7
+                            function caltime(){
+                                if(model.timeElapsed > 60){
+                                    let c = Math.floor(model.timeElapsed/60)
+                                    return c + " min"
+                                }
+                                else{
+                                    return model.timeElapsed + " sec"
+                                }
+                            }
+                                    anchors.centerIn: parent
+                                text: "Elapsed:\n" + caltime()
+                                color: "#2F0000"
+                                font.weight: Font.Bold
+                                font.pixelSize: 8
+                                lineHeight: .7
+                            }
                         }
                     }
+
                 }
-
             }
+
         }
 
+        Rectangle{
+            width: 30
+            height: width
+            radius: width
+            border.width: 1
+            border.color: "#2F0000"
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            anchors.margins: 10
+            color: "#D9D9D9"
+            MouseArea{
+                id:mouser
+                anchors.fill: parent
+                hoverEnabled: true
+                cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
+
+                onClicked:{
+
+                    console.log("add to listview")
+                    ls.displaylistview()
+                }
+            }
+            IconButton{
+                anchors.centerIn: parent
+                iconSource: IconSvg.plusIcon
+                iconImage.sourceSize.width: 20
+                iconColor: "#2968B2"
+                onClicked: {
+                    ls.displaylistview()
+                }
+            }
+        }
     }
-
-    Rectangle{
-        width: 30
-        height: width
-        radius: width
-        border.width: 1
-        border.color: "#2F0000"
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        anchors.margins: 10
-        color: "#D9D9D9"
-        MouseArea{
-            id:mouser
-            anchors.fill: parent
-            hoverEnabled: true
-            cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
-
-            onClicked:{
-
-                console.log("add to listview")
-                ls.displaylistview()
-            }
-        }
-        IconButton{
-            anchors.centerIn: parent
-            iconSource: IconSvg.plusIcon
-            iconImage.sourceSize.width: 20
-            iconColor: "#2968B2"
-            onClicked: {
-                ls.displaylistview()
-            }
-        }
-    }
-}

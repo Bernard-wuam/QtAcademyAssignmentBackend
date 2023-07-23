@@ -19,7 +19,8 @@ class ToDoListModel : public QAbstractListModel {
     TitleRole = Qt::UserRole,
     DescriptionRole,
     IsAlarmSetRole,
-    StartTimeRole
+    StartTimeRole,
+    TimeElasedRole
   };
 
   // Basic functionality:
@@ -31,7 +32,7 @@ class ToDoListModel : public QAbstractListModel {
 
   ToDo *toDoItemList() const;
   void setToDoItemList(ToDo *newToDoItemList);
-  Q_INVOKABLE void add(QString, QString, bool, QString);
+  // Q_INVOKABLE void add(QString, QString, bool, int, int, int, int);
 
  signals:
   void toDoItemListChanged();
